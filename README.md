@@ -1,4 +1,4 @@
-# uui7-typed
+# uuid7-typed
 
 A type-safe TypeScript wrapper for UUIDv7 generation with comprehensive validation and utility methods.
 
