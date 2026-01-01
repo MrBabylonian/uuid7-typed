@@ -55,7 +55,7 @@ class UUID7Generator {
   /** Regular expression pattern for validating UUIDv7 format compliance */
   private static readonly validateUUID7: RegExp =
     /^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-  
+
   /** Internal UUIDv7 generator instance from the uuidv7 library */
   private static readonly generator = new V7Generator();
 
@@ -208,7 +208,7 @@ class UUID7Generator {
    * ```
    */
   static getTimestamp(uuid: UUID7): Date {
-    const timestampHex = uuid.replace(/-/g, "").slice(0, 12);
+    const timestampHex = uuid.slice(0, 8) + uuid.slice(9, 13);
     const timestampMs = parseInt(timestampHex, 16);
     return new Date(timestampMs);
   }
@@ -241,7 +241,3 @@ class UUID7Generator {
 }
 
 export { type UUID7, UUID7Generator };
-
-
-const uuid = UUID7Generator.create();
-console.log("Generated UUIDv7:", uuid);

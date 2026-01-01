@@ -1,15 +1,26 @@
 {
-  "name": "uui7-typed",
+  "name": "uuid7-typed",
   "version": "1.0.0",
-  "description": "",
+  "description": "Strictly typed UUIDv7 generator for TypeScript and JavaScript projects.",
   "license": "ISC",
-  "author": "",
-  "type": "commonjs",
-  "main": "index.js",
+  "author": "MrBabylonian",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "uuidv7": "^1.1.0"
+  },
+  "sideEffects": false,
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "typescript": "^5.9.3"
   }
 }
