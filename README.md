@@ -1,10 +1,10 @@
-# uui7-typed
+# uuid7-typed
 
 A type-safe TypeScript wrapper for UUIDv7 generation with comprehensive validation and utility methods.
 
 ## Overview
 
-`uui7-typed` provides a robust, type-safe interface for working with UUIDv7 identifiers in TypeScript applications. UUIDv7 is a time-ordered UUID variant that combines a timestamp with random data, making it ideal for database primary keys and distributed systems where ordering matters.
+`uuid7-typed` provides a robust, type-safe interface for working with UUIDv7 identifiers in TypeScript applications. UUIDv7 is a time-ordered UUID variant that combines a timestamp with random data, making it ideal for database primary keys and distributed systems where ordering matters.
 
 This library uses TypeScript's branded type system to distinguish validated UUIDv7 strings from regular strings at compile time, preventing accidental misuse of unvalidated strings where a UUID is expected.
 
@@ -20,13 +20,13 @@ This library uses TypeScript's branded type system to distinguish validated UUID
 ## Installation
 
 ```bash
-npm install uui7-typed
+npm install uuid7-typed
 ```
 
 ## Quick Start
 
 ```typescript
-import { UUID7Generator, UUID7 } from 'uui7-typed';
+import { UUID7Generator, UUID7 } from 'uuid7-typed';
 
 // Generate a new UUID
 const uuid: UUID7 = UUID7Generator.create();
@@ -46,7 +46,7 @@ getUser("random-string"); // ❌ TypeScript error!
 ### Basic UUID Generation
 
 ```typescript
-import { UUID7Generator } from 'uui7-typed';
+import { UUID7Generator } from 'uuid7-typed';
 
 // Generate a single UUID
 const uuid = UUID7Generator.create();
