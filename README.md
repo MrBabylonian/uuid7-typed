@@ -16,6 +16,7 @@ This library uses TypeScript's branded type system to distinguish validated UUID
 - **Utility Methods**: Extract timestamps, compare UUIDs, and batch generation
 - **Zero Runtime Overhead**: Type safety is compile-time only
 - **Fail-Fast Design**: Clear error messages for invalid inputs
+- **Sentinel Values**: Built-in `EPOCH` and `NIL` constants for common use cases
 
 ## Installation
 
@@ -37,7 +38,7 @@ function getUser(id: UUID7) {
   // Your implementation here
 }
 
-getUser(uuid);           // ✅ Works
+getUser(uuid);            // ✅ Works
 getUser("random-string"); // ❌ TypeScript error!
 ```
 
@@ -107,6 +108,32 @@ const uuids = UUID7Generator.createMany(10);
 uuids.sort(UUID7Generator.compare);
 ```
 
+### Using Sentinel Constants
+
+```typescript
+// EPOCH: A valid UUIDv7 representing Unix epoch (1970-01-01)
+// Useful as a minimum value for comparisons or as a valid placeholder
+const minUuid = UUID7Generator.EPOCH;
+console.log(UUID7Generator.isValid(minUuid)); // true
+console.log(UUID7Generator.getTimestamp(minUuid)); // 1970-01-01T00:00:00.000Z
+
+// Any new UUID will be "greater than" EPOCH
+const newUuid = UUID7Generator.create();
+console.log(UUID7Generator.compare(UUID7Generator.EPOCH, newUuid)); // -1
+
+// NIL: The standard nil UUID (all zeros) - NOT a valid UUIDv7
+// Useful for representing "no value" or "unassigned" states
+let userId: UUID7 | string = UUID7Generator.NIL;
+
+if (userId === UUID7Generator.NIL) {
+  console.log("User ID not assigned yet");
+  userId = UUID7Generator.create(); // Assign a real ID
+}
+
+// NIL fails validation (it's not a UUIDv7)
+console.log(UUID7Generator.isValid(UUID7Generator.NIL)); // false
+```
+
 ## API Reference
 
 ### Types
@@ -124,6 +151,30 @@ type UUID7 = string & { readonly __brand: unique symbol; };
 #### `UUID7Generator`
 
 A static utility class for generating and managing UUIDv7 identifiers.
+
+##### Constants
+
+###### `EPOCH: UUID7`
+
+A valid UUIDv7 representing Unix epoch (1970-01-01T00:00:00.000Z).
+
+- **Value**: `"00000000-0000-7000-8000-000000000000"`
+- **Type**: `UUID7` (passes `isValid()` check)
+- **Use Cases**:
+  - Minimum value for comparisons
+  - Valid placeholder/default value
+  - Database queries for "all records"
+
+###### `NIL: string`
+
+The nil UUID (all zeros) as defined by RFC 4122.
+
+- **Value**: `"00000000-0000-0000-0000-000000000000"`
+- **Type**: `string` (NOT `UUID7` — fails `isValid()` check)
+- **Use Cases**:
+  - Sentinel value for "no value" or "unassigned"
+  - Representing absence of an ID
+  - Interoperability with systems expecting RFC 4122 nil UUID
 
 ##### Methods
 
@@ -198,7 +249,7 @@ This structure ensures that UUIDs are naturally sortable by creation time while 
 
 ## Requirements
 
-- Node.js (any recent version)
+- Node.js 18+ (ES2022 support)
 - TypeScript 4.0+ (for branded types support)
 
 ## Dependencies
@@ -214,6 +265,12 @@ ISC
 Contributions are welcome! Please feel free to submit issues and pull requests.
 
 ## Changelog
+
+### 1.1.0
+- Added `EPOCH` constant: A valid UUIDv7 representing Unix epoch timestamp
+- Added `NIL` constant: The RFC 4122 nil UUID for "no value" sentinel
+- Comprehensive test coverage (80+ test cases)
+- Performance optimization for timestamp extraction
 
 ### 1.0.0
 - Initial release
