@@ -10,10 +10,31 @@
   "files": [
     "dist"
   ],
+  "keywords": [
+    "uuid",
+    "uuidv7",
+    "uuid7",
+    "typed",
+    "branded-types",
+    "type-safe",
+    "typescript",
+    "javascript",
+    "unique-id",
+    "distributed-systems",
+    "microservices"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MrBabylonian/uuid7-typed.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MrBabylonian/uuid7-typed/issues"
+  },
+  "homepage": "https://github.com/MrBabylonian/uuid7-typed#readme",
   "scripts": {
     "build": "tsc",
-    "prepublishOnly": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run build && node --test dist/**/*.test.js",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "uuidv7": "^1.1.0"

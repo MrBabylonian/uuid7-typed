@@ -63,6 +63,12 @@ class UUID7Generator {
   private constructor() { }
 
   /**
+ * A UUIDv7 representing Unix epoch (1970-01-01T00:00:00.000Z).
+ * Useful as a "minimum" value for comparisons or defaults.
+ */
+  static readonly EPOCH: UUID7 = "00000000-0000-7000-8000-000000000000" as UUID7;
+
+  /**
    * Generates a new UUIDv7 with guaranteed uniqueness and time-ordering properties.
    * 
    * This method creates a fresh UUIDv7 that includes a timestamp component, making it
