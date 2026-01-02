@@ -727,3 +727,32 @@ describe("UUID7Generator", () => {
     });
   });
 });
+// ============================================================
+// NIL CONSTANT
+// ============================================================
+describe("NIL", () => {
+  it("should NOT be a valid UUIDv7", () => {
+    assert.strictEqual(UUID7Generator.isValid(UUID7Generator.NIL), false);
+  });
+
+  it("should be the standard nil UUID format", () => {
+    assert.strictEqual(UUID7Generator.NIL, "00000000-0000-0000-0000-000000000000");
+  });
+
+  it("should fail fromString() validation", () => {
+    assert.throws(
+      () => UUID7Generator.fromString(UUID7Generator.NIL),
+      /Invalid UUIDv7 format/,
+    );
+  });
+
+  it("should return null from tryFromString()", () => {
+    const result = UUID7Generator.tryFromString(UUID7Generator.NIL);
+    assert.strictEqual(result, null);
+  });
+
+  it("should be distinguishable from EPOCH", () => {
+    assert.notStrictEqual(UUID7Generator.NIL, UUID7Generator.EPOCH);
+  });
+});
+

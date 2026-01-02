@@ -1,6 +1,6 @@
 {
   "name": "uuid7-typed",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Strictly typed UUIDv7 generator for TypeScript and JavaScript projects.",
   "license": "ISC",
   "author": "MrBabylonian",

@@ -69,6 +69,24 @@ class UUID7Generator {
   static readonly EPOCH: UUID7 = "00000000-0000-7000-8000-000000000000" as UUID7;
 
   /**
+ * The nil UUID (all zeros) as defined by RFC 4122.
+ * 
+ * This is NOT a valid UUIDv7 and will fail `isValid()` checks.
+ * Use this to represent "no value" or "unassigned" states where
+ * you need a sentinel value distinct from valid UUIDs.
+ * 
+ * @example
+ * ```typescript
+ * let userId: UUID7 | string = UUID7Generator.NIL;
+ * 
+ * if (userId === UUID7Generator.NIL) {
+ *   console.log("User ID not assigned yet");
+ * }
+ * ```
+ */
+  static readonly NIL: string = "00000000-0000-0000-0000-000000000000";
+
+  /**
    * Generates a new UUIDv7 with guaranteed uniqueness and time-ordering properties.
    * 
    * This method creates a fresh UUIDv7 that includes a timestamp component, making it
